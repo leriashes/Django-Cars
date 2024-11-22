@@ -1,0 +1,20 @@
+name: django-cars
+
+services:
+  db:
+    image: postgres:latest
+    container_name: carsdb
+    env_file:
+      - .env
+    ports:
+      - ${DATABASE_PORT}:5432
+
+  app:
+    build: .
+    container_name: carsapp
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
