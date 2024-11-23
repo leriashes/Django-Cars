@@ -7,4 +7,5 @@ router.register(r'cars', CarViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('api/cars/<int:id>/comments/', CommentListCreateView.as_view())
 ]
