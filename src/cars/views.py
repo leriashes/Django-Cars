@@ -5,11 +5,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import *
 from .serializers import *
+from .permissions import IsOwnerOrReadOnly
 
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
 class CommentListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
