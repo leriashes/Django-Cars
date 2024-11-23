@@ -10,6 +10,7 @@ class CarSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    car = serializers.HiddenField(default=None)
 
     class Meta:
         model = Comment
