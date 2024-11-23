@@ -22,3 +22,11 @@ class CommentListCreateView(generics.ListCreateAPIView):
         except Car.DoesNotExist:
             raise NotFound(detail="No Car matches the given query.")
         return Comment.objects.filter(car=car_id)
+    
+    def perform_create(self, serializer):
+        car_id = self.kwargs.get('id')
+        try:
+            Car.objects.get(id=car_id)
+        except Car.DoesNotExist:
+            raise NotFound(detail="No Car matches the given query.")
+        serializer.save(car=car_id)
