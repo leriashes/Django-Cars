@@ -31,3 +31,9 @@ class CommentListCreateView(generics.ListCreateAPIView):
         except Car.DoesNotExist:
             raise NotFound(detail="No Car matches the given query.")
         serializer.save(car=car_id)
+
+
+def cars(request):
+    cars = Car.objects.all().order_by('created_at')
+    count = len(cars)
+    return render(request, 'cars/cars.html', {'cars': cars, 'count': count})

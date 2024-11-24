@@ -1,11 +1,13 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import *
+from cars import views
 
 router = routers.SimpleRouter()
-router.register(r'cars', CarViewSet)
+router.register(r'cars', views.CarViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('api/cars/<int:id>/comments/', CommentListCreateView.as_view())
+    path('api/cars/<int:id>/comments/', views.CommentListCreateView.as_view()),
+
+    path('cars/', views.cars, name='cars_all'),
 ]

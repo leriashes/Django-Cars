@@ -1,0 +1,23 @@
+{% extends 'cars/base.html' %}
+
+{% block body %}
+
+    <h1 class="page-title">Все машины</h1>
+
+    <main class="cars-list">
+        {% for car in cars %}
+            <div class="car-item">
+                <h2><a>{{car.make}} {{car.model}} 
+                    {% if car.year %}
+                        ({{car.year}})
+                    {% endif %}
+                </a></h2>
+                <div class="car-meta">
+                    <p><a>{{car.owner}}</a></p>
+                    <p class="car-date">{{car.created_at}}</p>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </main>
+{% endblock %}

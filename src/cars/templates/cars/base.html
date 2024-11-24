@@ -1,13 +1,20 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Машинки.ру{% endblock %}</title>
+        <link type="text/css" href="{% static 'cars/css/style.css' %}" rel="stylesheet" />
     </head>
     <body>
-        <h1>Машинки.ру</h1>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a href="#">Машинки.ру</a>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
-        <footer>
+        <footer class="footer">
             <div>
                 © 2024 Валерия Шевченко
             </div>
