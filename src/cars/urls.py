@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/cars/<int:id>/comments/', views.CommentListCreateView.as_view()),
 
     path('cars/', views.cars, name='cars_all'),
+    path('cars/<int:id>/', views.car, name='car_detail'),
 ]

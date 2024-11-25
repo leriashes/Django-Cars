@@ -7,7 +7,7 @@
     <main class="cars-list">
         {% for car in cars %}
             <div class="car-item">
-                <h2><a>{{car.make}} {{car.model}} 
+                <h2><a href="{% url 'car_detail' id=car.id%}">{{car.make}} {{car.model}} 
                     {% if car.year %}
                         ({{car.year}})
                     {% endif %}

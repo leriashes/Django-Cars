@@ -1,0 +1,39 @@
+{% extends 'cars/base.html' %}
+
+{% block body %}
+    <main class="car-details">
+        <h1 class="page-title">{{ car.make }} {{ car.model }}
+            {% if car.year %}
+                ({{ car.year }})
+            {% endif %}
+        </h1>
+
+        <div class="car-info">
+            <p>Владелец: <a href="#" class="owner-link">{{ car.owner }}</a></p>
+            <p class="car-date">Опубликовано: {{ car.created_at }}</p>
+            <p class="car-updated">Последнее изменение: {{ car.updated_at }}</p>
+        </div>
+
+        <div class="car-description">
+            <h2 class="comments-title">Описание</h2>
+            <p>{{ car.description }}</p>
+        </div>
+
+        <div class="comments-section">
+            <h2 class="comments-title">Комментарии</h2>
+            <div class="comments-list">
+                {% for comment in comments %}
+                    <div class="comment">
+                        <h2 class="comment-author">
+                            <a href="#">{{ comment.author }}</a>
+                            <span class="comment-date">{{ comment.created_at }}</span>
+                        </h2>
+                        <div class="comment-content">
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

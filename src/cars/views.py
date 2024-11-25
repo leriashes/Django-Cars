@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -37,3 +37,8 @@ def cars(request):
     cars = Car.objects.all().order_by('created_at')
     count = len(cars)
     return render(request, 'cars/cars.html', {'cars': cars, 'count': count})
+
+def car(request, id):
+    car = get_object_or_404(Car, id=id)
+    comments = Comment.objects.filter(car=id).order_by('created_at')
+    return render(request, 'cars/car.html', {'car': car, 'comments': comments})
