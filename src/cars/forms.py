@@ -50,3 +50,13 @@ class RegistrationForm(forms.ModelForm):
         self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Имя пользователя'})
         self.fields['password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Пароль'})
         self.fields['password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Повторите пароль'})
+
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['make', 'model', 'year', 'description']
+        labels = {'make': 'Марка', 'model': 'Модель', 'year': 'Год выпуска', 'description': 'Описание'}
+        widgets = {'make': forms.TextInput(attrs={'class': 'form-control'}),
+                   'model': forms.TextInput(attrs={'class': 'form-control'}),
+                   'year': forms.NumberInput(attrs={'class': 'form-control'}),
+                   'description': forms.Textarea(attrs={'class': 'form-control'})}

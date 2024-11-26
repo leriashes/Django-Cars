@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -102,3 +103,16 @@ def user(request, username):
     count = len(cars)
 
     return render(request, 'cars/user.html', {'userpage': userpage, 'cars': cars, 'count': count})
+
+@login_required(login_url="/login")
+def car_create(request):
+    if request.method == "POST":
+        form = CarForm(request.POST)
+        if form.is_valid():
+            car = form.save(commit=False)
+            car.owner = User.objects.filter(id=request.user.id).first()
+            car.save()
+            return redirect('user_page', request.user.username)
+    else:
+        form = CarForm()
+    return render(request, 'cars/edit.html', {'form': form})

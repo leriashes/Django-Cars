@@ -1,0 +1,24 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}Машинки.ру - Добавление авто{% endblock %}
+
+{% block body %}
+    <main class="car-details">
+        <h1 class="page-title">Добавление машины</h1>
+
+        <div>
+            <form method="POST" class="post-form">{% csrf_token %}
+                <div class="new-comment">
+                    {{ form.make.label}} {{ form.make}}
+                    {{ form.model.label}} {{ form.model}}
+                    {{ form.year.label}}{{ form.year}}
+                    {{ form.description.label}} {{ form.description}}
+                    <div class="comment-actions">
+                        <button type="reset" class="btn btn-cancel">Отмена</button>
+                        <button type="submit" class="btn btn-submit">Отправить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
