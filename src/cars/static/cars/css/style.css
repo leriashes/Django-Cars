@@ -29,11 +29,23 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: brown;
+    background-color: rgb(165, 42, 42);
     color: #fff;
     padding: 10px 20px;
     position: sticky;
     top: 0;
+}
+
+.navbar-links {
+    display: flex;
+}
+
+.navbar-links a{
+    padding-left: 20px;
+}
+
+.navbar-links a:hover{
+    text-decoration: underline;
 }
 
 .navbar-brand a {
@@ -108,6 +120,62 @@ hr {
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
+}
+
+.new-comment {
+    max-width: 800px;
+    margin: 0 auto; 
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.form-control {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    resize: none;
+    min-height: 20px;
+    outline: none;
+    background-color: inherit;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: #666;
+}
+
+.btn-cancel:hover {
+    color: #000;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: #003f8c;
 }
 
 .comment p {

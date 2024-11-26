@@ -21,6 +21,17 @@
 
         <div class="comments-section">
             <h2 class="comments-title">Комментарии</h2>
+            {% if user.is_authenticated %}
+                <form method="POST" class="post-form">{% csrf_token %}
+                    <div class="new-comment">
+                        {{ form.content}}
+                        <div class="comment-actions">
+                            <button type="reset" class="btn btn-cancel">Отмена</button>
+                            <button type="submit" class="btn btn-submit">Отправить</button>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
             <div class="comments-list">
                 {% for comment in comments %}
                     <div class="comment">

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import generics, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import *
 from .serializers import *
 from .permissions import IsOwnerOrReadOnly
+from .forms import *
 
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
@@ -41,4 +42,19 @@ def cars(request):
 def car(request, id):
     car = get_object_or_404(Car, id=id)
     comments = Comment.objects.filter(car=id).order_by('created_at')
+
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.author = User.objects.filter(id=request.user.id).first()
+                comment.car = Car.objects.filter(id=id).first()
+                comment.save()
+                return redirect('car_detail', id)
+        
+        form = CommentForm()
+        return render(request, 'cars/car.html', {'car': car, 'comments': comments, 'form': form})
+
     return render(request, 'cars/car.html', {'car': car, 'comments': comments})
+
