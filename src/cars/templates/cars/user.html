@@ -1,0 +1,45 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}Машинки.ру - {{userpage.username}}{% endblock %}
+
+{% block body %}
+
+    {% if user.is_authenticated and user.id == userpage.id%}
+        <div class="header">
+            <h1 class="header-title">Мои машины</h1>
+
+            <button class="btn btn-add">
+                Добавить машину
+            </button>
+        </div>
+    {% else %}
+        <h1 class="page-title">Машины пользователя {{userpage.username}}</h1>
+    {% endif %}
+    
+
+    <main class="cars-list">
+        {% for car in cars %}
+            <div class="car-item">
+                <h2><a href="{% url 'car_detail' id=car.id%}">{{car.make}} {{car.model}} 
+                    {% if car.year %}
+                        ({{car.year}})
+                    {% endif %}
+                </a></h2>
+                <div class="car-meta">
+                    <div>
+                        <p class="car-date">Создано: {{car.created_at}}</p>
+                        <p class="car-date">Последнее изменение: {{car.updated_at}}</p>
+                    </div>
+                    {% if user.is_authenticated and user.id == userpage.id%}
+                        <div>
+                            <button class="btn btn-edit">Изменить</button>
+                            <button class="btn btn-del">Удалить</button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </main>
+
+{% endblock %}

@@ -9,8 +9,13 @@
     </head>
     <body>
         <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="{% url 'index' %}">Машинки.ру</a>
+            <div class="navbar-links">
+                <div class="navbar-brand">
+                    <a href="{% url 'index' %}">Машинки.ру</a>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <a href="{% url 'cars_all' %}">Все машины</a>
+                </div>
             </div>
 
             <div class="navbar-links">
@@ -25,7 +30,7 @@
                 
                 {% if user.is_authenticated %}
                     <div >
-                        <a href="#">{{user.username}}</a>
+                        <a href="{% url 'user_page' username=user.username %}">{{user.username}}</a>
                     </div>
                     <div >
                         <a href="{% url 'logout' %}">Выход</a>

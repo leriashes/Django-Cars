@@ -9,13 +9,13 @@
     <main class="cars-list">
         {% for car in cars %}
             <div class="car-item">
-                <h2><a href="{% url 'car_detail' id=car.id%}">{{car.make}} {{car.model}} 
+                <h2><a href="{% url 'car_detail' id=car.id %}">{{car.make}} {{car.model}} 
                     {% if car.year %}
                         ({{car.year}})
                     {% endif %}
                 </a></h2>
                 <div class="car-meta">
-                    <p><a>{{car.owner}}</a></p>
+                    <p><a href="{% url 'user_page' username=car.owner.username %}">{{car.owner}}</a></p>
                     <p class="car-date">{{car.created_at}}</p>
                 </div>
             </div>

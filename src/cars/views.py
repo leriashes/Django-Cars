@@ -95,3 +95,10 @@ def car(request, id):
 
     return render(request, 'cars/car.html', {'car': car, 'comments': comments})
 
+def user(request, username):
+    userpage = get_object_or_404(User, username=username)
+
+    cars = Car.objects.filter(owner=userpage.id).order_by('created_at')
+    count = len(cars)
+
+    return render(request, 'cars/user.html', {'userpage': userpage, 'cars': cars, 'count': count})

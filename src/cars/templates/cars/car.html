@@ -11,7 +11,7 @@
         </h1>
 
         <div class="car-info">
-            <p>Владелец: <a href="#" class="owner-link">{{ car.owner }}</a></p>
+            <p>Владелец: <a href="{% url 'user_page' username=car.owner.username %}" class="owner-link">{{ car.owner }}</a></p>
             <p class="car-date">Опубликовано: {{ car.created_at }}</p>
             <p class="car-updated">Последнее изменение: {{ car.updated_at }}</p>
         </div>
@@ -38,7 +38,7 @@
                 {% for comment in comments %}
                     <div class="comment">
                         <h2 class="comment-author">
-                            <a href="#">{{ comment.author }}</a>
+                            <a href="{% url 'user_page' username=comment.author.username %}">{{ comment.author }}</a>
                             <span class="comment-date">{{ comment.created_at }}</span>
                         </h2>
                         <div class="comment-content">
