@@ -116,3 +116,15 @@ def car_create(request):
     else:
         form = CarForm()
     return render(request, 'cars/edit.html', {'form': form})
+
+@login_required(login_url="/login")
+def car_edit(request, id):
+    car = get_object_or_404(Car, id=id, owner=request.user.id)
+    if request.method == "POST":
+        form = CarForm(request.POST, instance=car)
+        if form.is_valid():
+            car = form.save()
+            return redirect('user_page', request.user.username)
+    else:
+        form = CarForm(instance=car)
+    return render(request, 'cars/edit.html', {'form': form})
