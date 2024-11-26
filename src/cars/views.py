@@ -128,3 +128,9 @@ def car_edit(request, id):
     else:
         form = CarForm(instance=car)
     return render(request, 'cars/edit.html', {'form': form})
+
+@login_required(login_url="/login")
+def car_delete(request, id):
+    car = get_object_or_404(Car, id=id, owner=request.user.id)
+    car.delete()
+    return redirect('user_page', request.user.username)

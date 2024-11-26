@@ -29,9 +29,12 @@
                         <p class="car-date">Последнее изменение: {{car.updated_at}}</p>
                     </div>
                     {% if user.is_authenticated and user.id == userpage.id%}
-                        <div>
+                        <div style="display: flex;">
                             <a href="{% url 'car_edit' id=car.id %}" class="btn btn-edit">Изменить</a>
-                            <button class="btn btn-del">Удалить</button>
+                            <form method="POST" action="{% url 'car_delete' id=car.id %}" onclick="return confirm('Вы уверены, что хотите удалить данное авто? Действие нельзя отменить.');">
+                                {% csrf_token %}    
+                                <button class="btn btn-del">Удалить</button>
+                            </form>
                         </div>
                     {% endif %}
                 </div>
