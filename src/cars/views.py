@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import now
+from django.db.models import Count
 from rest_framework import generics, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from datetime import timedelta
 
 from .models import *
 from .serializers import *
@@ -70,7 +73,10 @@ def RegisterUser(request):
     return render(request, 'cars/registration.html', {'form': form})
 
 def index(request):
-    return render(request, 'cars/index.html')
+    users = User.objects.filter(cars__created_at__gte=(now() - timedelta(days=365))).annotate(car_count=Count('cars')).order_by('-car_count')[:10]
+    cars = Car.objects.all().order_by('-created_at')[:10]
+
+    return render(request, 'cars/index.html', {'cars': cars, 'users': users})
 
 def cars(request):
     cars = Car.objects.all().order_by('created_at')
