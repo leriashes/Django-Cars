@@ -1,5 +1,7 @@
 {% extends 'cars/base.html' %}
 
+{% block title %}Машинки.ру - {{ car.make }} {{ car.model }}{% endblock %}
+
 {% block body %}
     <main class="car-details">
         <h1 class="page-title">{{ car.make }} {{ car.model }}
