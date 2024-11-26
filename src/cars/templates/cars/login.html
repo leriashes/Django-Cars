@@ -1,0 +1,19 @@
+{% extends 'cars/base.html' %}
+
+{% block body %}
+    <main>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+
+            <h1>Вход</h1>
+            <div class="login-form">
+                {{ form.username}}
+                {{ form.password}}
+                <div class="comment-actions">
+                    <button type="reset" class="btn btn-cancel">Отмена</button>
+                    <button type="submit" class="btn btn-submit">Войти</button>
+                </div>
+            </div>
+        </form>
+    </main>
+{% endblock %}

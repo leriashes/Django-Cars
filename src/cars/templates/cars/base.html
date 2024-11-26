@@ -10,13 +10,13 @@
     <body>
         <nav class="navbar">
             <div class="navbar-brand">
-                <a href="#">Машинки.ру</a>
+                <a href="{% url 'index' %}">Машинки.ру</a>
             </div>
 
             <div class="navbar-links">
                 {% if not user.is_authenticated %}
                     <div >
-                        <a href="#">Вход</a>
+                        <a href="{% url 'login' %}">Вход</a>
                     </div>
                     <div >
                         <a href="#">Регистрация</a>

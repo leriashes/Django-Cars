@@ -34,6 +34,19 @@ class CommentListCreateView(generics.ListCreateAPIView):
             raise NotFound(detail="No Car matches the given query.")
         serializer.save(car=car_id)
 
+def LoginUser(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            
+            if user != None:
+                login(request, user)
+                return redirect('index')
+    
+    form = LoginForm()
+    return render(request, 'cars/login.html', {'form': form})
+    
 def LogoutUser(request):
     logout(request)
     request.user = None
