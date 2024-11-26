@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import authenticate, login, logout
 from rest_framework import generics, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -33,6 +34,13 @@ class CommentListCreateView(generics.ListCreateAPIView):
             raise NotFound(detail="No Car matches the given query.")
         serializer.save(car=car_id)
 
+def LogoutUser(request):
+    logout(request)
+    request.user = None
+    return redirect('index')
+
+def index(request):
+    return render(request, 'cars/index.html')
 
 def cars(request):
     cars = Car.objects.all().order_by('created_at')
