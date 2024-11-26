@@ -52,6 +52,22 @@ def LogoutUser(request):
     request.user = None
     return redirect('index')
 
+def RegisterUser(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.is_active = True
+            user.save()
+
+            login(request, user)
+
+            return redirect('index')
+    else:
+        form = RegistrationForm()
+    return render(request, 'cars/registration.html', {'form': form})
+
 def index(request):
     return render(request, 'cars/index.html')
 

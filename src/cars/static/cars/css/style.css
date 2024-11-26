@@ -149,6 +149,8 @@ hr {
     min-height: 20px;
     outline: none;
     background-color: inherit;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .form-control:focus {

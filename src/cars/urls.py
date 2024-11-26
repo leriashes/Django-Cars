@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('login/', views.LoginUser, name="login"),
     path('logout/', views.LogoutUser, name="logout"),
+    path('registration/', views.RegisterUser, name="registration"),
 
     path('', views.index, name="index"),
     path('cars/', views.cars, name='cars_all'),
