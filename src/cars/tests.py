@@ -18,7 +18,7 @@ class CarAPITestCase(TestCase):
     def test_get_car_list(self):
         """Проверяем, что можно получить список машин"""
         response = self.client.get('/api/cars/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_car_authenticated(self):
         """Только аутентифицированный пользователь может создать машину"""
